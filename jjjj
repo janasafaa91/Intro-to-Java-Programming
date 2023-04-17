@@ -1,0 +1,46 @@
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form method="post" action="signup.jsp">
+  Email: <input type="text" name="email"><br>
+  Name: <input type="text" name="name"><br>
+  Phone Number: <input type="text" name="phone"><br>
+  Age: <input type="text" name="age"><br>
+  Gender:
+  <input type="radio" name="gender" value="Male">Male
+  <input type="radio" name="gender" value="Female">Female<br>
+  Password: <input type="password" name="pass"><br>
+  Re-enter Password: <input type="password" name="conf"><br> 
+  <input type="submit" value="submit"><br>
+</form>
+<%
+if(request.getParameter("pass")!=null){
+  String password = request.getParameter("pass");
+  String conf = request.getParameter("conf");
+  if (!password.equals(conf)) {
+    out.println("password and password confirmation do not match");
+    request.getRequestDispatcher("signup.jsp").include(request, response);}
+   else if (password.length() < 6 ) {
+    out.println("password must be at least 6 characters long");
+    request.getRequestDispatcher("signup.jsp").include(request, response);
+    
+  }
+  else {
+	    // Password and confirmation match, and password is valid length
+	    // Process the rest of the form data as desired, e.g.:
+	    String email = request.getParameter("email");
+	    String name = request.getParameter("name");
+	    String phone = request.getParameter("phone");
+	    int age = Integer.parseInt(request.getParameter("age"));
+	    String gender = request.getParameter("gender");}
+}
+%>
+</body>
+</html>
